@@ -179,9 +179,11 @@ int main(void) {
 		}
 	
 		uint8_t do_wakeup = 0;
-		if (sleep_count > 20) do_wakeup = 1;
+		if (sleep_count > 6) do_wakeup = 1;
 		int32_t temp_diff = res.temp - res_last_wakeup.temp;
-		if (temp_diff > 350 || temp_diff < -350) do_wakeup = 1;
+		int32_t hum_diff = res.hum - res_last_wakeup.hum;
+		if (temp_diff > 200 || temp_diff < -200) do_wakeup = 1;
+		if (hum_diff > 2000 || temp_diff < -2000) do_wakeup = 1;
 		
 		if (do_wakeup) {
 			// Wakeup esp8266
@@ -233,8 +235,8 @@ int main(void) {
 		
 		if (! debug_mode) {
 			esp_power(0);
-			
-			for (uint8_t i = 0; i < 6; i++) {
+			// wakeup every 5 minutes
+			for (uint8_t i = 0; i < 9; i++) {
 				rtc_sleep();
 				_delay_us(5);
 				uptime += 33;

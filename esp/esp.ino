@@ -4,6 +4,8 @@
 
 #define AVR_ADDR 0x50
 
+#include "wifisettings.h"
+
 #ifndef WLAN_SSID
 #define WLAN_SSID "<SSID>"
 #define WLAN_KEY "<PASSWORD>"
