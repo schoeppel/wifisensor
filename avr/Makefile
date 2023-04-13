@@ -23,6 +23,9 @@ clean:
 
 upload:
 	$(UPDI) -f $(NAME).hex
+	
+fuses:
+	$(UPDI) -v -fs 1:0x1e
 
 reset:
 	$(UPDI) -v -r
